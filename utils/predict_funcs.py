@@ -101,7 +101,7 @@ def predictAndSplittedWrite(parameterDict : dict):
         labelDict = dict()
         with open(csvPath) as file:
             for line in file.readlines():
-                line = line.split()
+                line = line.split(",")
                 labelDict[line[0]] = line[1]
 
 

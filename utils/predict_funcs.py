@@ -31,8 +31,6 @@ def predictAndWrite(parameterDict : dict):
     dataPath = parameterDict.get("data_path", os.path.join(imagesPath, "data"))
 
 
-
-
     allImgs = [os.path.join(imagesPath, img) for img in os.listdir(imagesPath)
                if img.endswith(".jpg")]
 
@@ -52,7 +50,10 @@ def predictAndWrite(parameterDict : dict):
         scores = scores.reshape(scores.shape[1:])
         xmlName = os.path.basename(imgName).split(".")[0] + ".xml"
         annoWriter = annotation.AnnotationWriter(
-            os.path.join(dataPath,xmlName), overwrite=overwrite)
+            os.path.join(dataPath, xmlName), overwrite=overwrite,
+            writeDirectory=os.path.join(dataPath, xmlName),
+            isFileName=True)
+
         annoWriter.compile()
 
 

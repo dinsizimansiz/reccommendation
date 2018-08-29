@@ -3,7 +3,7 @@
 # https://lxml.de/tutorial.html
 #
 from xml.dom .minidom import parseString as parseXML
-
+from sys import stderr
 
 try:
     from lxml import etree
@@ -87,12 +87,14 @@ class AnnotationWriter(object):
                                                      "write directory if " \
                                                      "don't want to overwrite."
 
-
+        fileFlag = os.path.exists(file)
 
         if AnnotationWriter.isFileWrapper(file):
 
             with file as fp:
-                self.string = fp.read()
+                self.string = fp.read() if fileFlag else ""
+                if not fileFlag:
+                    stderr.write("Cannot find file named {}\n".format)
 
             if overwrite:
                 self.writeDirectory = file.name
@@ -105,7 +107,10 @@ class AnnotationWriter(object):
             if isFileName:
 
                 with open(file) as fp:
-                    self.string = fp.read()
+
+                    self.string = fp.read() if fileFlag else ""
+                    if not fileFlag:
+                        stderr.write("Cannot find file named {}\n".format)
 
                 if overwrite:
                     self.writeDirectory = file

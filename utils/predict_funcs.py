@@ -129,8 +129,6 @@ def predictAndSplittedWrite(parameterDict : dict):
         for i in range(len(labels)):
             if labels[i] == -1:
                 continue
-            elif labels[i] != 0:
-                continue
             if scores[i] <= scoreThreshold:
                 continue
             controlList.append([])
